@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer
+    container_name: "portainer"
+    restart: always
+    networks:
+      - pretty-fly-docker_net
+    ports:
+      - 9000:9000
+    environment:
+      - VIRTUAL_HOST=portainer.local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer:/data
+
+  # bind:
+  #   restart: always
+  #   container_name: "bind"
+  #   image: sameersbn/bind:latest
+  #   # dns: 127.0.0.1
+  #   # environment:
+  #   #   - ROOT_PASSWORD=
+  #   ports:
+  #   - "53:53/udp"
+  #   - "53:53/tcp"
+  #   - "10000:10000/tcp"
+  #   volumes:
+  #   - ./bind:/data
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    networks:
+      - pretty-fly-docker_net
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  whoami:
+    image: jwilder/whoami
+    container_name: whoami
+    networks:
+      - pretty-fly-docker_net
+    environment:
+      - VIRTUAL_HOST=whoami.local
+
+  jenkins:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    # user: jenkins
+    volumes:
+      - ./jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    # environment:
+    #   JENKINS_HOST_HOME: "/data/jenkins"
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+      - "50000:50000"
+    networks:
+      - pretty-fly-docker_net
+    environment:
+      - VIRTUAL_HOST=jenkins.local
+      - VIRTUAL_PORT=8080
+
+networks:
+  pretty-fly-docker_net:
+    external: true
