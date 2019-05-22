@@ -10,7 +10,7 @@ services:
     ports:
       - 9000:9000
     environment:
-      - VIRTUAL_HOST=portainer.prettyfly.net
+      - VIRTUAL_HOST=portainer$ENV_DOMAIN
       - VIRTUAL_PORT=9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -65,7 +65,7 @@ services:
     networks:
       - pretty-fly-docker_net
     environment:
-      - VIRTUAL_HOST=jenkins.prettyfly.net
+      - VIRTUAL_HOST=jenkins$ENV_DOMAIN
       - VIRTUAL_PORT=8080:8080
 
 networks:
