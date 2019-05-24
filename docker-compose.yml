@@ -40,6 +40,7 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./misc/network_internal.conf:/etc/nginx/network_internal.conf
+      # - ./misc/vhost.d:/etc/nginx/vhost.d:ro
 
   whoami:
     image: jwilder/whoami
@@ -66,7 +67,8 @@ services:
       - pretty-fly-docker_net
     environment:
       - VIRTUAL_HOST=jenkins$ENV_DOMAIN
-      - VIRTUAL_PORT=8080:8080
+      - VIRTUAL_PORT=8080
+
 
 networks:
   pretty-fly-docker_net:
