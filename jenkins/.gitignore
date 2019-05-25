@@ -8,6 +8,7 @@
 !/jobs
 !/.gitignore
 !.keep
+!*.deploy
 
 credentials.xml
 !jenkins-plugins.txt
