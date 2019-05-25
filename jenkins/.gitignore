@@ -8,7 +8,8 @@
 !/jobs
 !/.gitignore
 !.keep
-!*.deploy
+!**/*.deploy
+!/jobs/pretty-fly-prod/pretty-fly-admin-prod.deploy
 
 credentials.xml
 !jenkins-plugins.txt
