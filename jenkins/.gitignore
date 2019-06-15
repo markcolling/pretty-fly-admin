@@ -9,6 +9,7 @@
 !/.gitignore
 !.keep
 
+
 credentials.xml
 !jenkins-plugins.txt
 
@@ -27,3 +28,5 @@ jobs/**
 jobs/**/*workspace
 
 #as a result only settings and job config.xml files in JENKINS_HOME will be tracked by git
+!**/*.deploy
+._*
