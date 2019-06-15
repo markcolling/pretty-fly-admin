@@ -54,7 +54,7 @@ services:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     networks:
-      - net
+      - pretty-fly-docker_net
     container_name: gitlab
       #hostname: 'gitlab.example.com'
     environment:
