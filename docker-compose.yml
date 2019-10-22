@@ -39,19 +39,19 @@ services:
     restart: unless-stopped
 
 
-  # bind:
-  #   restart: always
-  #   container_name: "bind"
-  #   image: sameersbn/bind:latest
-  #   # dns: 127.0.0.1
-  #   # environment:
-  #   #   - ROOT_PASSWORD=
-  #   ports:
-  #   - "53:53/udp"
-  #   - "53:53/tcp"
-  #   - "10000:10000/tcp"
-  #   volumes:
-  #   - ./bind:/data
+  bind:
+    restart: always
+    container_name: "bind"
+    image: sameersbn/bind:latest
+    dns: 127.0.0.1
+    env_file:
+      - ./bind/bindsecrets.env
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "10000:10000"
+    volumes:
+    - ./bind:/data
 
   nginx-proxy:
     image: jwilder/nginx-proxy
