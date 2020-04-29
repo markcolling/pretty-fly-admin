@@ -16,29 +16,29 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer:/data
 
-  # unifi-controller:
-  #   image: linuxserver/unifi-controller
-  #   container_name: unifi-controller
-  #   networks:
-  #     - pretty-fly-docker_net
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - MEM_LIMIT=1024M #optional
-  #     - VIRTUAL_HOST=unifi-controller${ENV_DOMAIN}
-  #     - VIRTUAL_PORT=8443
-  #   volumes:
-  #     - ./unifi_controller/config:/config
-  #   ports:
-  #     - '3478:3478/udp'
-  #     - '10001:10001/udp'
-  #     - '8080:8080'
-  #     - '8081:8081'
-  #     - '8443:8443'
-  #     - '8843:8843'
-  #     - '8880:8880'
-  #     - '6789:6789'
-  #   restart: unless-stopped
+  unifi-controller:
+    image: linuxserver/unifi-controller
+    container_name: unifi-controller
+    networks:
+      - net
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MEM_LIMIT=1024M #optional
+      - VIRTUAL_HOST=unifi-controller${ENV_DOMAIN}
+      - VIRTUAL_PORT=8443
+    volumes:
+      - ./unifi_controller/config:/config
+    ports:
+      - '3478:3478/udp'
+      - '10001:10001/udp'
+      - '8080:8080'
+      - '8081:8081'
+      - '8443:8443'
+      - '8843:8843'
+      - '8880:8880'
+      - '6789:6789'
+    restart: unless-stopped
 
 
   bind:
