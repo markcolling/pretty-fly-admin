@@ -6,7 +6,7 @@ services:
     container_name: "portainer"
     restart: always
     networks:
-      - pretty-fly-docker_net
+      - net
     ports:
       - 9000:9000
     environment:
@@ -47,7 +47,7 @@ services:
     image: sameersbn/bind:latest
     dns: 127.0.0.1
     networks:
-      - pretty-fly-docker_net
+      - net
     env_file:
       - ./bind/bindsecrets.env
     environment:
@@ -64,7 +64,7 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     networks:
-      - pretty-fly-docker_net
+      - net
     ports:
       - "80:80"
     volumes:
@@ -122,5 +122,9 @@ services:
 
 
 networks:
-  pretty-fly-docker_net:
-    external: true
+  net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.19.0.0/16"
+  # default:
